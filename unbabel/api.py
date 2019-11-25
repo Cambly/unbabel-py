@@ -148,7 +148,7 @@ class Account(object):
         self.balance = balance
 
     def __unicode__(self):
-        return u'email: {email}, balance: {balance}'.format(
+        return 'email: {email}, balance: {balance}'.format(
             email=self.email, balance=self.balance,
         )
 
@@ -168,7 +168,7 @@ class Job(object):
         self.text_format = text_format
 
     def __unicode__(self):
-        return u'order_id: {}, id: {}, status: {}'.format(
+        return 'order_id: {}, id: {}, status: {}'.format(
             self.order_id, self.id, self.status)
 
 
@@ -179,7 +179,7 @@ class Order(object):
         self.price = price
 
     def __unicode__(self):
-        return u'{id} - {status} - {price}'.format(
+        return '{id} - {status} - {price}'.format(
             id=self.id,
             status=self.status,
             price=self.price,
@@ -227,7 +227,7 @@ class UnbabelApi(object):
                           client_owner_email=None,
                           ):
         ## Collect args
-        data = {k: v for k, v in locals().iteritems() if not v in (self, None)}
+        data = {k: v for k, v in locals().items() if not v in (self, None)}
 
         if self.is_bulk:
             self.bulk_data.append(data)

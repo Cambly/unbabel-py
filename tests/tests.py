@@ -10,6 +10,7 @@ import uuid
 
 from unbabel.api import (UnbabelApi, Order, LangPair, Tone, Topic,
                          Translation, Account, Job, BadRequestException)
+from functools import reduce
 
 class TestUnbabelAPI(unittest.TestCase):
     UNBABEL_TEST_USERNAME = os.environ.get('UNBABEL_TEST_USERNAME')
@@ -96,12 +97,12 @@ class TestUnbabelAPI(unittest.TestCase):
         account = self.api.get_account()
         self.assertIsInstance(account, Account,
                               'Should be an Account instance')
-        self.assertIsInstance(account.username, unicode,
+        self.assertIsInstance(account.username, str,
                               'Username is not unicode')
         self.assertEqual(account.username, self.UNBABEL_TEST_USERNAME,
                          'Wrong username')
         self.assertIsInstance(account.balance, float, 'Balance is not float')
-        self.assertIsInstance(account.email, unicode, 'Email is not unicode')
+        self.assertIsInstance(account.email, str, 'Email is not unicode')
 
     def test_api_get_translations(self):
         data = {
@@ -165,7 +166,7 @@ class TestUnbabelAPI(unittest.TestCase):
             'text': "This is a test translation",
             'source_language': 'en',
             'target_language': 'pt',
-            'target_text': u"Isto é uma tradução de teste",
+            'target_text': "Isto é uma tradução de teste",
             'text_format': 'text',
             'tone': 'Informal',
             'topic': ['startups', 'tech'],
